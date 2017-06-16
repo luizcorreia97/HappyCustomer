@@ -1,0 +1,201 @@
+<meta charset="UTF-8">
+<!-- Header -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="intro-text">
+						<span class="name"><h1>{{Titulo}}</h1></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Portfolio Grid Section -->
+	<section class="grid form_negocio" ng-controller="GetNegocioController">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+					<!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+					<form name="sentMessage" id="contactForm" novalidate>
+						
+					
+							<div class="form-group col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+
+								<h3>DADOS GERAIS</h3>
+
+							</div>
+						
+						<div class="row control-group">
+							
+							<input type="hidden"id="nome1" ng-model="negocio.id">
+							<input type="hidden"id="nome2" ng-model="item.id">
+							<div  class="form-group col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+									<label>Situação</label>
+			      				<select class="form-control" required data-validation-required-message="Por favor selecione um tipo de usuário"
+							    ng-options="situacao for situacao in situacoes" ng-model="negocio.situacao" >
+								    <option value="">Situação</option>
+								</select>								
+	
+								<p class="help-block text-danger"></p>
+								
+							</div>
+							<div
+								class="form-group col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+								<label>Nome</label> 
+								<input type="text" ng-model="negocio.nome" class="form-control"
+									placeholder="Nome" id="nome" required
+									data-validation-required-message="Por favor insira um nome">
+								<p class="help-block text-danger"></p>
+							</div>
+
+						</div>
+						
+						<div class="row control-group">
+
+							<div 
+								class="form-group col-xs-7 floating-label-form-group controls floating-label-form-group-with-value">
+								<label>Usuário Responsável</label>
+								<select class="form-control" required data-validation-required-message="Por favor selecione um contato"
+							    ng-options="usuario.nome for usuario in usuarios track by usuario.id" ng-model="negocio.usuarioresponsavel" >    
+								    <option value="">Usuário Responsável</option>
+								</select>									
+	
+								<p class="help-block text-danger"></p>
+								
+							</div>
+							
+							<div 
+								class="form-group col-xs-5 floating-label-form-group controls floating-label-form-group-with-value">
+								<label>Data</label> 
+								<input type="text" class="form-control date" placeholder="Data" ng-model="negocio.data" id="data_cadastro" required data-validation-required-message="Please enter your name.">
+								<p class="help-block text-danger"></p>
+							</div>
+							
+						</div>
+						
+						<div class="row control-group">
+						
+							<div 
+								class="form-group col-xs-7 floating-label-form-group controls floating-label-form-group-with-value">
+								<label>Contato</label>
+								<select class="form-control" required data-validation-required-message="Por favor selecione um contato"
+							    ng-options="contato.nome for contato in contatos track by contato.id" ng-model="negocio.contato" >    
+								    <option value="">Contato</option>
+								</select>											
+	
+								<p class="help-block text-danger"></p>
+								
+							</div>
+						
+							<div 
+								class="form-group col-xs-5 floating-label-form-group controls floating-label-form-group-with-value">
+								<label>Empresa</label>
+								<select class="form-control" ng-model="negocio.empresa" required data-validation-required-message="Por favor selecione uma empresa"
+							    ng-options="empresa.razaosocial for empresa in empresas track by empresa.id">    
+								    <option value="">Empresa</option>
+								</select>			
+								<p class="help-block text-danger"></p>							
+							</div>
+
+						</div>
+
+						<div class="row control-group">
+						
+							<h3>ITENS NEGOCIADOS</h3>
+
+							<div class="col-xs-12 ">
+									<div class="form-group col-sm-5 col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+										<label>Produto</label> 
+										<input type="hidden" ng-model="item.id" />
+										<select class="form-control" required data-validation-required-message="Por favor selecione um tipo de contato"
+									   	 ng-options="produto.nome for produto in produtos track by produto.id" ng-model="item.produto">    
+									    	<option value="">Produto</option>
+										</select>
+										<p class="help-block text-danger"></p>
+									</div>
+									<div class="form-group col-sm-4 col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+										<label>Preço Unitário (R$)</label> <input type="text" disabled 
+											class="form-control" ng-model="item.produto.preco"
+											placeholder="Preço Unitário" id="precounitario" required
+											data-validation-required-message="Por favor insira um nome">
+										<p class="help-block text-danger"></p>
+									</div>
+									<div class="form-group col-sm-5 col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+										<label>Quantidade</label> <input type="text" 
+											class="form-control" ng-model="item.quantidade" min="1" max="100" 
+											placeholder="Quantidade" id="quantidade" required
+											data-validation-required-message="Por favor insira um nome">
+										<p class="help-block text-danger"></p>
+									</div>
+									<div class="form-group col-sm-4 col-xs-12 floating-label-form-group controls floating-label-form-group-with-value">
+										<label>Sub Total (R$)</label> <input type="text" disabled 
+											class="form-control" ng-model="item.quantidade*item.produto.preco"
+											placeholder="Sub Total" id="subtotal" required
+											data-validation-required-message="Por favor insira um nome">
+										<p class="help-block text-danger"></p>
+									</div>
+									
+									<div class="col-xs-2 btn-group">
+										<a class="btn btn-success btn-sm" href="javascript:void(0)" data-ng-click='addItem()'>Salvar Item</a>
+									</div>
+
+								</div>								
+							
+						</div>
+						
+						<div class="row ">
+
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-hover table-light col-xs-12">
+									<thead>
+										<tr class="uppercase">											
+											<th>Produto</th>
+											<th>Preço Unitário</th>
+											<th>Quantidade</th>
+											<th>Subtotal</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									  	<tr dir-paginate="item in listItens |filter:procurar|orderBy:sortKey:reverse|itemsPerPage:5">					                
+							             	<td>{{item.produto.nome}}</td>
+							             	<td>R$ {{item.produto.preco}}</td>
+							                <td>{{item.quantidade}}</td>
+							                <td>R$ {{item.quantidade*item.produto.preco}}</td>
+											<td class="btn-group">
+												<a class="btn btn-warning  btn-sm" target="_blank" href="javascript:void(0)" ng-click='selectEditItem(item.id)'>Editar</a>
+												<a class="btn btn-danger btn-sm" href="javascript:void(0)" ng-click='delItem(item.id)'>Excluir</a>
+												<a class="btn btn-default btn-sm" target="_blank" href="#/Produto/Editar/{{item.produto.id}}">Ver</a>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+								<h3>{{total}}</h3>								
+							</div>
+							<div class="col-xs-12">
+								<dir-pagination-controls max-size="3" boundary-links="true"></dir-pagination-controls>					
+							</div>
+
+						</div>
+						
+						<div id="success"></div>
+						<div class="row">
+							<div class="form-group btn-group col-xs-12">
+								<div class="col-sm-6 col-xs-12">
+									<a class="btn btn-danger btn-lg to-left" href="#/Negocio">Voltar</a>
+								</div>
+								<div class="col-sm-6 col-xs-12">
+									<a class="btn btn-success btn-lg to-right" ng-click='EnviarInformacaoNegocio()'>Salvar</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
